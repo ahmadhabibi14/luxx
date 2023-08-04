@@ -1,0 +1,6 @@
+# Ignore file
+
+.env
+
+# Svelte
+svelte/node_modules
