@@ -2,18 +2,17 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-
-	"log"
-
 	"github.com/joho/godotenv"
+
+	"luxx/routes"
 )
 
 func init() {
-	err := godotenv.Load()
-	if err != nil {
+	if err := godotenv.Load(); err != nil {
 		log.Println("Error loading .env files")
 	}
 }
@@ -24,12 +23,7 @@ func main() {
 	app.Static("/", "./client")
 
 	api := app.Group("/api") // All Backend services in /api endpoints
-
-	api.Get("/hello", func(c *fiber.Ctx) error {
-		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"message": "Hello World",
-		})
-	})
+	routes.Oauth2(api)
 
 	app.Listen(webdomain)
 }
