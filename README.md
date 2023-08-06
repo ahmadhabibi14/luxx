@@ -1,3 +1,3 @@
-I make web using sveltekit and fiber
+### I make web using svelte and fiber
 
-Later I add oauth
+**Later I add oauth**
