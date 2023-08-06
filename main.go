@@ -25,5 +25,5 @@ func main() {
 	api := app.Group("/api") // All Backend services in /api endpoints
 	routes.Oauth2(api)
 
-	app.Listen(webdomain)
+	log.Fatal(app.Listen(webdomain))
 }

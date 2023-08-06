@@ -1,17 +1,17 @@
 package auth
 
 import (
+	"os"
+
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
 )
 
 var (
-	githubClientID     = "6b79cf7aa04b3788b0c5"
-	githubClientSecret = "c5517c8b86339e2f57506af49b4b8ca1bc47fd3e"
-	githubOAuthConfig  = &oauth2.Config{
-		ClientID:     githubClientID,
-		ClientSecret: githubClientSecret,
+	githubOAuthConfig = &oauth2.Config{
+		ClientID:     os.Getenv("OAUTH2_GITHUB_CLIENT_ID"),
+		ClientSecret: os.Getenv("OAUTH2_GITHUB_CLIENT_SECRET"),
 		RedirectURL:  "http://localhost:3000/api/oauth/github/callback",
 		Endpoint:     github.Endpoint,
 	}
