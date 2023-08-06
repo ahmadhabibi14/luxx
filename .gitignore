@@ -5,3 +5,4 @@ tmp/main
 # Client
 client/node_modules
 client/index.html
+client/**/*.html
