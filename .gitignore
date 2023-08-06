@@ -6,3 +6,4 @@ tmp/main
 client/node_modules
 client/index.html
 client/**/*.html
+client/css/main.tmp.css
