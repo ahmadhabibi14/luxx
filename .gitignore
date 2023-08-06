@@ -1,6 +1,7 @@
 # Ignore file
-
 .env
+tmp/main
 
-# Svelte
-svelte/node_modules
+# Client
+client/node_modules
+client/index.html
