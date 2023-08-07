@@ -3,7 +3,10 @@ package auth
 import (
 	"os"
 
+	"log"
+
 	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
 )
@@ -42,4 +45,28 @@ func Oauth2GithubCallback(c *fiber.Ctx) error {
 	defer resp.Body.Close()
 	c.Set("Content-Type", "application/json")
 	return c.Status(fiber.StatusOK).SendStream(resp.Body)
+}
+
+func getGithubClientID() string {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env files")
+	}
+	githubClientID, exists := os.LookupEnv("OAUTH2_GITHUB_CLIENT_ID")
+	if !exists {
+		log.Fatal("Github Client ID not defined in .env file")
+	}
+	return githubClientID
+}
+
+func getGithubClientSecret() string {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env files")
+	}
+	githubClientSecret, exists := os.LookupEnv("OAUTH2_GITHUB_CLIENT_SECRET")
+	if !exists {
+		log.Fatal("Github Client ID not defined in .env file")
+	}
+	return githubClientSecret
 }

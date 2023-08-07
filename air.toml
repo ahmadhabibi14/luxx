@@ -5,7 +5,7 @@ tmp_dir = "tmp"
   include_ext = ['go']
   exclude_regex = ['_test.go']
   exclude_dir = ['tmp']
-  delay = 400
+  delay = 1000
   kill_delay = "0s"
 
 [color]
