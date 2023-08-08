@@ -2,13 +2,12 @@ const compile = require( 'svelte/compiler' ).compile
 
 const chokidar = require( 'chokidar' );
 const esbuild = require( 'esbuild' );
-const {readdirSync, statSync, existsSync, writeFileSync, readFileSync, readFile, writeFile} = require( 'fs' );
-const {join, basename, resolve, dirname, relative, extname} = require( 'path' );
+const {readdirSync, statSync, existsSync, writeFileSync, readFileSync} = require( 'fs' );
+const {join, basename, resolve, dirname, relative} = require( 'path' );
 const sveltePlugin = require( 'esbuild-svelte' );
 const {sum} = require( 'lodash' );
 const parse5 = require( 'parse5' );
 const notifier = require('node-notifier');
-const { dir } = require('console');
 
 process.on('uncaughtException', error => {
   notifier.notify({
@@ -261,44 +260,11 @@ function layoutFor( path, content = {} ) {
     let html = content.html || '';
     const innerCss = (content.css || {}).code || '';
     
-    return parse5.serialize( tree ).replace( cssKEY, css + innerCss ).replace( jsKEY, js ).replace( appKEY, html );
-  });
-}
-
-function replaceFullPathComment(directoryPath) {
-  const fileNames = readdirSync(directoryPath);
-  fileNames.forEach((fileName) => {
-    if (fileName !== 'node_modules') {
-      const filePath = join(directoryPath, fileName);
-      const stats = statSync(filePath);
-      if (stats.isDirectory()) {
-        replaceFullPathComment(filePath);
-      } else {
-        const ext = extname(fileName);
-        if (ext === '.html') {
-          readFile(filePath, 'utf-8', (err, data) => {
-            if (err) {
-              console.error('Error reading file: ', err);
-              return;
-            }
-            const searchString = __dirname;
-            const escapedSearchString = searchString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(escapedSearchString, 'g');
-            const matches = data.match(regex);
-            if (matches) {
-              const updatedData = data.replace(regex, '//');
-              writeFile(filePath, updatedData, 'utf-8', (err) => {
-                if (err) {
-                console.error('Error writing file: ', err);
-                return;
-              }
-              console.log('FIle Updated')
-            })
-          } 
-          })
-        }
-      }
-    }
+    return parse5.serialize( tree ).
+      replace( cssKEY, css + innerCss ).
+      replace( jsKEY, js ).
+      replace( appKEY, html ).
+      replaceAll("fakecss:"+__dirname,'fakecss:.');
   });
 }
 
@@ -354,11 +320,6 @@ function replaceFullPathComment(directoryPath) {
   saveFiles();
   watch && console.log( 'first build end' );
   
-  /**
-   * Replace fullpath comment with '//'
-   */
-  replaceFullPathComment(__dirname);
-
   if( watch ) {
     const pagesPaths = new Set( pages.map( p => resolve( p ) ) );
     
@@ -366,6 +327,12 @@ function replaceFullPathComment(directoryPath) {
     
     function changeListener( path, stats, type, watcher ) {
       switch (type) {
+      case 'change':
+        notifier.notify({
+          title: 'Change occurs',
+          message: `Change occurs in "${path}"`
+        });
+        break;
       case 'add':
         notifier.notify({
           title: 'File added',

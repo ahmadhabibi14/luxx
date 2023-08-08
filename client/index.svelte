@@ -1,14 +1,22 @@
 <script lang="ts">
+  import SideMenu from "_components/SideMenu.svelte";
+  import Header from "_components/Header.svelte";
+  import { users } from "types/user";
+
   let name: string = "Habi"
 </script>
 
-<main class="w-full h-screen flex justify-center bg-slate-100">
-  <div class="w-96 h-fit bg-white border shadow-lg rounded-2xl p-6 mt-44 flex flex-col">
-    <a
-      class="text-white w-full py-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-center"
-      href="/api/oauth/github/login"
-    >
-      Login with Github
-    </a>
+<section class="max-w-[1024px] mx-auto flex">
+  <SideMenu />
+  <div class="ml-[324px] w-[724px]">
+    <Header />
+    <main id="main_content" class="w-full overflow-y-scroll mt-[190px]">
+      {#each users as user}
+        <p>Name: {user.name}</p>
+        <p>Email: {user.email}</p>
+      {/each}
+      <div class="w-full h-[5000px]"></div>
+      <p>main</p>
+    </main>
   </div>
-</main>
+</section>

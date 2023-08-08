@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Hide the scrollbar track and thumb */
+#main_content::-webkit-scrollbar {
+  width: 0.5em;
+}
+#main_content::-webkit-scrollbar-track {
+  background: transparent;
+}
+#main_content::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
