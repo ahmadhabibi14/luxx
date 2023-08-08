@@ -9,11 +9,17 @@ import (
 	"github.com/joho/godotenv"
 
 	"luxx/routes"
+	"runtime"
 )
 
 func init() {
 	if err := godotenv.Load(".env"); err != nil {
 		log.Println("Error loading .env files")
+	}
+	if cpu := runtime.NumCPU(); cpu == 1 {
+		runtime.GOMAXPROCS(2)
+	} else {
+		runtime.GOMAXPROCS(cpu)
 	}
 }
 
