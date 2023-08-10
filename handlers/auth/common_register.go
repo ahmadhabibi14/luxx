@@ -5,9 +5,14 @@ import (
 	"encoding/json"
 
 	"luxx/config"
+	"sync"
 
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
+)
+
+var (
+	mutex sync.Mutex
 )
 
 type (
@@ -27,6 +32,7 @@ type (
 )
 
 func Register(c *fiber.Ctx) error {
+	mutex.Lock()
 	var db *sql.DB = config.ConnectDB()
 	var in registerInput
 	var out registerOut
@@ -61,5 +67,6 @@ func Register(c *fiber.Ctx) error {
 	}
 
 	defer db.Close()
+	defer mutex.Unlock()
 	return c.JSON(out)
 }
