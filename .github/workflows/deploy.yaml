@@ -37,4 +37,5 @@ jobs:
             go get
             go build main.go
             cd client
+            pnpm install
             pnpm build:prod
