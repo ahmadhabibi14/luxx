@@ -31,7 +31,7 @@ type (
 func Register(c *fiber.Ctx) error {
 	var db *sql.DB = config.ConnectDB()
 	var in registerInput
-	// var out registerOut
+	var out registerOut
 	var errmsg registerError
 
 	if err := c.BodyParser(&in); err != nil {
@@ -77,7 +77,7 @@ func Register(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(string(errorResp))
 	}
 
-	out := registerOut{
+	out = registerOut{
 		Token:   token,
 		UserId:  user_id,
 		Message: "User created successfully!",

@@ -1,16 +1,53 @@
 <script lang="ts">
-  interface register {
+  type JSONvalue = 
+    | string
+    | number
+    | boolean
+
+  interface JSONObject {
+    [x: string]: JSONvalue;
+  }
+  interface registerIn {
     email: string;
     password: string;
     username: string;
     fullname: string;
   }
-  let payload: register = {
+  let payload: registerIn = {
     email: '',
     password: '',
     username: '',
     fullname: '',
   };
+  let response: JSONObject = {};
+  let errorResp: JSONObject = {};
+  
+  async function handleRegister( e: Event | SubmitEvent ): Promise<void> {
+    const requestBody = JSON.stringify(payload);
+    const targetForm = e.target as HTMLFormElement;
+    const actionURL: string = targetForm.action;
+    try {
+      const resp: Response = await fetch(actionURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: requestBody,
+      });
+
+      if (resp.ok) {
+        const creds: Promise<any> = await resp.json();
+        response = JSON.parse(await creds);
+        console.log(response)
+      } else {
+        const errorData: Promise<any> = await resp.json();
+        errorResp = JSON.parse(await errorData);
+        console.error(errorData)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 </script>
 
 <div class="min-h-screen w-full flex flex-row text-slate-900">
@@ -21,7 +58,10 @@
     <section class="flex flex-col h-fit w-[55%]">
       <h1 class="font-bold text-center text-4xl">Create Your Account</h1>
       <p class="text-center text-sm text-slate-700 mt-1.5">Welcome! Please enter your details</p>
-      <form class="flex flex-col space-y-3 mt-6">
+      <form
+        action="/api/auth/register"
+        on:submit|preventDefault={handleRegister}
+        class="flex flex-col space-y-3 mt-6">
         <label for="fullname">
           <input
             class="w-full border-slate-400/80 border rounded-xl bg-transparent focus:border-slate-950 caret-slate-950 py-2 px-4 outline-1 focus:outline-slate-950"
