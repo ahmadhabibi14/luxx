@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fmt"
 	"os"
 
 	"log"
@@ -23,6 +24,7 @@ var (
 // /api/oauth/github/login
 func Oauth2GithubLogin(c *fiber.Ctx) error {
 	url := githubOAuthConfig.AuthCodeURL("state", oauth2.AccessTypeOffline)
+	fmt.Println("to github")
 	return c.Redirect(url)
 }
 

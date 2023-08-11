@@ -6,7 +6,7 @@ import (
 	"luxx/handlers/auth"
 )
 
-func Oauth2(api fiber.Router) {
+func OAuth2(api fiber.Router) {
 	oauth := api.Group("/oauth")
 
 	// GitHub Oauth2 provider

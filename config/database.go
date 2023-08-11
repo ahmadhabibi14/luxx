@@ -7,9 +7,17 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
+func init() {
+	if err := godotenv.Load(".env"); err != nil {
+		log.Println("Error loading .env files")
+	}
+}
+
 func ConnectDB() *sql.DB {
+
 	DbHost := os.Getenv("DB_HOST")
 	DbPort := os.Getenv("DB_PORT")
 	DbName := os.Getenv("DB_NAME")
