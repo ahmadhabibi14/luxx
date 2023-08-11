@@ -34,6 +34,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             cd /root/luxx
+            go get
             go build main.go
             cd client
             pnpm build:prod
