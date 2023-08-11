@@ -12,6 +12,12 @@ import (
 	"golang.org/x/oauth2/github"
 )
 
+func init() {
+	if err := godotenv.Load(".env"); err != nil {
+		log.Println("Error loading .env files")
+	}
+}
+
 var (
 	githubOAuthConfig = &oauth2.Config{
 		ClientID:     os.Getenv("OAUTH2_GITHUB_CLIENT_ID"),

@@ -14,7 +14,7 @@ import (
 
 func init() {
 	if err := godotenv.Load(".env"); err != nil {
-		log.Println("Error loading .env files")
+		log.Fatalln("Error loading .env files")
 	}
 	if cpu := runtime.NumCPU(); cpu == 1 {
 		runtime.GOMAXPROCS(2)

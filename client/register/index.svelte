@@ -1,56 +1,89 @@
 <script lang="ts">
-  type JSONvalue = 
-    | string
-    | number
-    | boolean
+  import { fade } from "svelte/transition";
+  import PopUpSuccess from "_components/PopUp_success.svelte";
 
-  interface JSONObject {
-    [x: string]: JSONvalue;
-  }
   interface registerIn {
     email: string;
     password: string;
     username: string;
     fullname: string;
-  }
-  let payload: registerIn = {
-    email: '',
-    password: '',
-    username: '',
-    fullname: '',
   };
-  let response: JSONObject = {};
-  let errorResp: JSONObject = {};
+  interface registerOut {
+    token: string;
+    user_id: string;
+    message: string;
+  };
+  interface registerError {
+    message: string;
+  };
+
+  let payload: registerIn = {
+    email: "",
+    password: "",
+    username: "",
+    fullname: "",
+  };
+  let response: registerOut = {
+    token: "",
+    user_id: "",
+    message: ""
+  };
+  let errorResp: registerError = {
+    message: ""
+  };
+  let uncaughtError: string;
+
+  $: isLoading = false;
+  $: isError = false;
+  $: isSuccess = false;
   
   async function handleRegister( e: Event | SubmitEvent ): Promise<void> {
+    isLoading = true;
+    if (payload.email === "" || payload.fullname === "" || payload.username === "" || payload.password === "") {
+      uncaughtError = "Please fill in all fields";
+      isLoading = false;
+      return;
+    }
     const requestBody = JSON.stringify(payload);
     const targetForm = e.target as HTMLFormElement;
     const actionURL: string = targetForm.action;
     try {
       const resp: Response = await fetch(actionURL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: requestBody,
       });
 
       if (resp.ok) {
         const creds: Promise<any> = await resp.json();
         response = JSON.parse(await creds);
-        console.log(response)
+        isSuccess = true;
+        setTimeout((): void => {
+          isSuccess = false;
+        }, 1500);
+        window.location.href = "/"
+        isLoading = false;
+        return;
       } else {
         const errorData: Promise<any> = await resp.json();
         errorResp = JSON.parse(await errorData);
-        console.error(errorData)
+        isLoading = false;
+        return;
       }
     } catch (error) {
-      console.error(error);
+      uncaughtError = error;
+      isLoading = false;
+      return;
     }
   }
 </script>
 
 <div class="min-h-screen w-full flex flex-row text-slate-900">
+  {#if isSuccess}
+    <div transition:fade class="delay-700 absolute top-0 right-0 h-full w-[55%] bg-white flex justify-center items-center">
+      <PopUpSuccess message={"success"} />
+    </div>
+  {/if}
   <div class="basis-[45%] flex justify-center items-center">
     <img src="/assets/icons/main/girl_stand_laptop.svg" alt="" class="w-[500px] h-auto">
   </div>
@@ -98,8 +131,19 @@
             placeholder="Password"
           />
         </label>
-        <button class="w-full py-2.5 bg-slate-950 hover:bg-slate-900 hover:shadow-md text-slate-100 rounded-xl" type="submit">
-          Create Account
+        <button
+          class="w-full flex justify-center items-center cursor-pointer py-2.5 bg-slate-950 hover:bg-slate-900 hover:shadow-md text-slate-100 rounded-xl"
+          type="submit"
+          >
+          {#if isLoading}
+            <svg class="w-[20px] h-auto animate-spin" fill="none" viewBox="0 0 24 24">
+              <path d="M2.19995 14.02C3.12995 18.58 7.15995 22 12 22C16.82 22 20.8399 18.59 21.7899 14.05" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21.81 10.06C20.91 5.46 16.86 2 12 2C7.16995 2 3.13995 5.43001 2.19995 9.98001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {:else}        
+            <p>Create Account</p>
+          {/if}
         </button>
       </form>
       <div class="flex flex-row space-x-2 items-center my-4">

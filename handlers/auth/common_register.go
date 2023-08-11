@@ -60,9 +60,9 @@ func Register(c *fiber.Ctx) error {
 		"INSERT INTO Users (user_id, username, full_name, email, password) VALUES (?, ?, ?, ?, ?)",
 		user_id,
 		in.Username,
+		in.Fullname,
 		in.Email,
 		in.Password,
-		in.Fullname,
 	)
 	if err != nil {
 		errmsg.ErrorMsg = "Unable to register user"
