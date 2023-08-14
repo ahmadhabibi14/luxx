@@ -26,10 +26,6 @@ func init() {
 func main() {
 	webdomain := fmt.Sprintf("localhost:%s", os.Getenv("WEB_PORT"))
 	app := fiber.New()
-
-	// Serve static file
-	app.Static("/", "./client")
-
 	// All Backend services in /api endpoints
 	api := app.Group("/api")
 	routes.Auth(api)
