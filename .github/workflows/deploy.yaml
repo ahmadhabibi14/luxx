@@ -36,6 +36,7 @@ jobs:
             cd /root/luxx
             go get
             go build main.go
-            cd client
+            cd web
             pnpm install
-            pnpm build:prod
+            pnpm build
+            pm2 reload all
