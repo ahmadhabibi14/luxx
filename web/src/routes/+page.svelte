@@ -1,11 +1,15 @@
 <script>
 	import welcome from "$lib/images/svelte-welcome.webp";
 	import welcome_fallback from "$lib/images/svelte-welcome.png";
+
+	import Head from "$lib/partials/head.svelte";
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<Head
+		title="LuXX"
+		description="Social app"
+	/>
 </svelte:head>
 
 <section>
