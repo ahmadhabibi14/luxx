@@ -5,10 +5,11 @@
   "scripts": {
     "start": "npm run dev",
     "tailwind:watch": "npx tailwindcss -i ./css/main.css -o ./css/main.tmp.css --watch",
+    "tailwind:prod": "npx tailwindcss -i ./css/main.css -o ./css/main.tmp.css",
     "watch": "concurrently 'pnpm run tailwind:watch' 'node build.js --watch'",
     "dev": "concurrently 'pnpm run tailwind:watch' 'node build.js --watch --serve'",
     "build": "node build.js",
-    "build:prod": "node build.js --minify",
+    "build:prod": "node build.js --minify && pnpm run tailwind:prod",
     "serve": "node build.js --serve"
   },
   "devDependencies": {
