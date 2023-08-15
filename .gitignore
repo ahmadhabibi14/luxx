@@ -1,6 +1,7 @@
 # Ignore file
 .env
 tmp/main
+main
 
 # Client
 client/node_modules
