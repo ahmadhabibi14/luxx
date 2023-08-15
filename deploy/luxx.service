@@ -1,0 +1,12 @@
+[Unit]
+Description=LuXX - A social notes sharing portal
+
+[Service]
+User=root
+Type=simple
+Restart=on-failure
+WorkingDirectory=/root/luxx
+ExecStart=/root/luxx/main
+
+[Install]
+WantedBy=multi-user.target
