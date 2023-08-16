@@ -9,10 +9,10 @@
 
 <section>
   {#if data.user}
-  <h1>Welcome {data?.user?.fullname ?? ""}</h1>
-  <p>{data?.user?.email ?? ""}</p>
-  <p>{data?.user?.username ?? ""}</p>
-  <p>{data?.user?.join_at ?? ""}</p>
+    <h1>Welcome {data.user.fullname}</h1>
+    <p>{data.user.email}</p>
+    <p>{data.user.username}</p>
+    <p>{data.user.join_at}</p>
   {/if}
 
   <h2>Hahahaha</h2>
