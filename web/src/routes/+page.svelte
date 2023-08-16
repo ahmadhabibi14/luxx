@@ -1,13 +1,6 @@
 <script>
   import Head from "$lib/partials/head.svelte";
-  import { user } from "../stores";
   export let data;
-
-  $: User = data?.authedUser;
-  $: {
-    const newUser = data?.authedUser;
-    user.set(newUser);
-  }
 </script>
 
 <svelte:head>
@@ -15,8 +8,12 @@
 </svelte:head>
 
 <section>
-  <h1>Welcome {User?.fullname ?? ""}</h1>
-  <p>{User?.email ?? ""}</p>
-  <p>{User?.username ?? ""}</p>
-  <p>{User?.join_at ?? ""}</p>
+  {#if data.user}
+  <h1>Welcome {data?.user?.fullname ?? ""}</h1>
+  <p>{data?.user?.email ?? ""}</p>
+  <p>{data?.user?.username ?? ""}</p>
+  <p>{data?.user?.join_at ?? ""}</p>
+  {/if}
+
+  <h2>Hahahaha</h2>
 </section>

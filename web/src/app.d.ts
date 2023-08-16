@@ -6,9 +6,7 @@ declare global {
 			code:			number,
 			message:	string
 		}
-		interface Locals {
-			authedUser: User | undefined
-		}
+		// interface Locals {}
 		// interface PageData {}
 		// interface Platform {}
 	}
