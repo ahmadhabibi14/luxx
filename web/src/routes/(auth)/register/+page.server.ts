@@ -34,6 +34,7 @@ export const actions: Actions = {
           path: "/",
           httpOnly: true,
           maxAge: 30 * 2 * 24 * 60 * 60,
+          secure: false,
           sameSite: "strict",
         }
       )
