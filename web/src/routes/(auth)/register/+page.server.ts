@@ -14,7 +14,7 @@ export const actions: Actions = {
       fullname
     });
     const resp: Response = await fetch(
-      "http://127.0.0.1:1414/api/auth/register",
+      "localhost:1414/api/auth/register",
       {
         method: "POST",
         headers: {
