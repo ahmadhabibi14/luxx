@@ -1,9 +1,14 @@
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
+import type { User } from "./types/user";
+
 declare global {
 	namespace App {
-		// interface Error {}
-		// interface Locals {}
+		interface Error {
+			code:			number,
+			message:	string
+		}
+		interface Locals {
+			authedUser: User | undefined
+		}
 		// interface PageData {}
 		// interface Platform {}
 	}
