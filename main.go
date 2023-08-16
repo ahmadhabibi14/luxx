@@ -30,6 +30,7 @@ func main() {
 	api := app.Group("/api")
 	routes.Auth(api)
 	routes.OAuth2(api)
+	routes.Users(api)
 
 	log.Fatal(app.Listen(webdomain))
 }

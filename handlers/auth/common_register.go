@@ -19,9 +19,9 @@ type (
 		Fullname string `json:"fullname"`
 	}
 	registerOut struct {
-		Token   string `json:"token"`
-		UserId  string `json:"userId"`
-		Message string `json:"message"`
+		Token    string `json:"token"`
+		Username string `json:"username"`
+		Message  string `json:"message"`
 	}
 	registerError struct {
 		ErrorMsg string `json:"error"`
@@ -78,9 +78,9 @@ func Register(c *fiber.Ctx) error {
 	}
 
 	out = registerOut{
-		Token:   token,
-		UserId:  user_id,
-		Message: "User created successfully!",
+		Token:    token,
+		Username: in.Username,
+		Message:  "User created successfully!",
 	}
 	successResp, _ := json.Marshal(out)
 
