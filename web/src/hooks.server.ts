@@ -4,7 +4,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   const session_token = event.cookies.get("session_token");
   try {
     const resp: Response = await fetch(
-      "localhost:1414/api/user/user-data",
+      "http://127.0.0.1:1414/api/user/user-data",
       {
         method: "GET",
         headers: {

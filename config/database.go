@@ -17,7 +17,6 @@ func init() {
 }
 
 func ConnectDB() *sql.DB {
-
 	DbHost := os.Getenv("DB_HOST")
 	DbPort := os.Getenv("DB_PORT")
 	DbName := os.Getenv("DB_NAME")
@@ -26,7 +25,7 @@ func ConnectDB() *sql.DB {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DbUser, DbPassword, DbHost, DbPort, DbName)
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		log.Println("Error connecting to database ::", err)
+		log.Fatalln("Error connecting to database ::", err)
 	}
 	return db
 }

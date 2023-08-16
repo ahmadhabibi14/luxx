@@ -13,11 +13,11 @@ import (
 
 type (
 	userDataOut struct {
-		Username string    `json:"username"`
-		Fullname string    `json:"fullname"`
-		Email    string    `json:"email"`
-		Avatar   string    `json:"avatar"`
-		JoinAt   time.Time `json:"join_at"`
+		Username string     `json:"username"`
+		Fullname string     `json:"fullname"`
+		Email    string     `json:"email"`
+		Avatar   string     `json:"avatar"`
+		JoinAt   *time.Time `json:"join_at"`
 	}
 	userDataError struct {
 		ErrorMsg string `json:"error"`
@@ -49,7 +49,7 @@ func UserData(c *fiber.Ctx) error {
 		&out.JoinAt,
 	)
 	if get_user_data == nil {
-		errmsg.ErrorMsg = "Cannot get user"
+		errmsg.ErrorMsg = err.Error()
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}

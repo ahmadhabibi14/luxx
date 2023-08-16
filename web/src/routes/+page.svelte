@@ -16,4 +16,7 @@
 
 <section>
   <h1>Welcome {User?.fullname ?? ""}</h1>
+  <p>{User?.email ?? ""}</p>
+  <p>{User?.username ?? ""}</p>
+  <p>{User?.join_at ?? ""}</p>
 </section>

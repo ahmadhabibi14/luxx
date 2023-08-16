@@ -3,5 +3,5 @@ export interface User {
   fullname: string;
   email: string;
   avatar: string;
-  joinDate: string;
+  join_at: Date;
 }

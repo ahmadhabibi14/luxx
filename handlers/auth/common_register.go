@@ -3,7 +3,6 @@ package auth
 import (
 	"database/sql"
 	"encoding/json"
-	"time"
 
 	"luxx/config"
 	"luxx/utils"
@@ -58,13 +57,12 @@ func Register(c *fiber.Ctx) error {
 	in.Password = string(hashedPassword)
 	user_id := utils.GenerateRandomID(10)
 	_, err = db.Exec(
-		"INSERT INTO Users (user_id, username, full_name, email, password, join_at) VALUES (?, ?, ?, ?, ?, ?)",
+		"INSERT INTO Users (user_id, username, full_name, email, password) VALUES (?, ?, ?, ?, ?)",
 		user_id,
 		in.Username,
 		in.Fullname,
 		in.Email,
 		in.Password,
-		time.Now(),
 	)
 	if err != nil {
 		errmsg.ErrorMsg = "Unable to register user"
