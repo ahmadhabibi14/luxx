@@ -5,7 +5,7 @@ CREATE TABLE `Users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `avatar` varchar(200) DEFAULT '/avatars/default.png',
-  `join_at` date DEFAULT curdate(),
+  `join_at` timestamp DEFAULT current_timestamp(),
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
