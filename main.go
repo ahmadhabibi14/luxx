@@ -6,8 +6,11 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/csrf"
 	"github.com/joho/godotenv"
 
+	"luxx/middlewares"
 	"luxx/routes"
 	"runtime"
 )
@@ -26,8 +29,8 @@ func init() {
 func main() {
 	webdomain := fmt.Sprintf("localhost:%s", os.Getenv("WEB_PORT"))
 	app := fiber.New()
-	// app.Use(cors.New(middlewares.CORSConfig))
-	// app.Use(csrf.New(middlewares.CSRFConfig))
+	app.Use(cors.New(middlewares.CORSConfig))
+	app.Use(csrf.New(middlewares.CSRFConfig))
 
 	// All Backend services in /api endpoints
 	api := app.Group("/api")
