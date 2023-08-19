@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -22,10 +23,15 @@ func ConnectDB() *sql.DB {
 	DbName := os.Getenv("DB_NAME")
 	DbUser := os.Getenv("DB_USER")
 	DbPassword := os.Getenv("DB_PASSWORD")
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DbUser, DbPassword, DbHost, DbPort, DbName)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", DbUser, DbPassword, DbHost, DbPort, DbName)
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		log.Fatalln("Error connecting to database ::", err)
 	}
+
+	db.SetMaxIdleConns(5)
+	db.SetMaxOpenConns(20)
+	db.SetConnMaxLifetime(60 * time.Minute)
+	db.SetConnMaxIdleTime(10 * time.Minute)
 	return db
 }

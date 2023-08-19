@@ -22,4 +22,4 @@ rsync -avz \
 # Run a remote script on a local machine over ssh
 ssh -p $SSH_PORT -i $SSH_PRIVATE_KEY \
   $SERVER_USER@$SERVER_HOST \
-  'bash' $PROJECT_DIR/deploy/deploy.sh
+  'bash' $PROJECT_DIR/deploy/build_on_server.sh
