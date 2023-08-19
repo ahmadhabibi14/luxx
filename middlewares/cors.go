@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
-var CorsConfig = cors.Config{
+var CORSConfig = cors.Config{
 	AllowHeaders:     "Origin, Content-Type, Accept, Content-Length, Accept-Language, Accept-Encoding, Connection, Access-Control-Allow-Origin",
 	AllowOrigins:     "http://localhost:3000, https://localhost:5173, http://203.194.113.211/",
 	AllowCredentials: true,
