@@ -14,9 +14,10 @@ export const load: PageServerLoad = async (event) => {
   );
   if (resp.ok) {
     const response: Promise<any> = await resp.json();
-    const responseData = JSON.parse(await response);
+    const responseData = await response;
 
-    const user: User = responseData;
+    const user: User = responseData as User;
+    console.log(response)
     return { user }
   } else {
     return {

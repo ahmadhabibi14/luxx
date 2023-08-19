@@ -11,6 +11,7 @@ import (
 type Querier interface {
 	CreateNewUser(ctx context.Context, arg CreateNewUserParams) error
 	GetUserByUsername(ctx context.Context, username string) (string, error)
+	GetUserDataByUserId(ctx context.Context, userID string) (GetUserDataByUserIdRow, error)
 	ListUsers(ctx context.Context) ([]ListUsersRow, error)
 }
 

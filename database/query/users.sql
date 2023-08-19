@@ -12,3 +12,7 @@ WHERE username = ?;
 -- name: ListUsers :many
 SELECT username, full_name, email, avatar, join_at FROM Users
 ORDER BY join_at DESC;
+
+-- name: GetUserDataByUserId :one
+SELECT username, full_name, email, avatar, join_at FROM Users
+WHERE user_id = ?;
