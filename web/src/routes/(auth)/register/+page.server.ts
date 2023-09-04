@@ -13,7 +13,6 @@ export const actions: Actions = {
       username,
       fullname
     });
-    console.log(body);
     const resp: Response = await fetch(
       "http://127.0.0.1:1414/api/auth/register",
       {

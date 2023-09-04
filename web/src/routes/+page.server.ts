@@ -1,5 +1,5 @@
 import type { PageServerLoad } from "./$types";
-import type { User } from "../types/user";
+import type { User } from "../../types/user";
 
 export const load: PageServerLoad = async (event) => {
   const session_token = event.cookies.get("session_token");

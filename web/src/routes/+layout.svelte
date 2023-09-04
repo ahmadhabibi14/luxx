@@ -2,6 +2,6 @@
 	import "../app.css";
 </script>
 
-<div class="app">
+<div class="app h-screen">
 	<slot />
 </div>
