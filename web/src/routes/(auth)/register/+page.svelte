@@ -1,9 +1,8 @@
-<script lang="ts">
-  import type { ActionData } from "./$types";
+<script>
   import Head from "$lib/partials/head.svelte";
 
-  export let form: ActionData;
-  let isError: boolean = false;
+  export let form;
+  let isError = false;
   if (form?.error) {
     isError = true;
   }

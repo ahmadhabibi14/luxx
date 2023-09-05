@@ -1,6 +1,6 @@
-import { redirect, type Actions } from "@sveltejs/kit";
+import { redirect } from "@sveltejs/kit";
 
-export const actions: Actions = {
+export const actions = {
   default: async ({ cookies, request, fetch }) => {
     const formData = await request.formData();
     const email = formData.get("email");
@@ -13,7 +13,7 @@ export const actions: Actions = {
       username,
       fullname
     });
-    const resp: Response = await fetch(
+    const resp = await fetch(
       "http://127.0.0.1:1414/api/auth/register",
       {
         method: "POST",
@@ -25,23 +25,24 @@ export const actions: Actions = {
     );
     // Check if response is ok
     if (resp.ok) {
-      const response: Promise<any> = await resp.json();
-      const responseData = JSON.parse(await response);
-      cookies.set(
-        "session_token",
-        responseData.token,
-        {
-          path: "/",
-          httpOnly: true,
-          maxAge: 30 * 2 * 24 * 60 * 60,
-          secure: false,
-          sameSite: "strict",
-        }
-      )
+      const response = await resp.json();
+      const responseData = await response;
+      console.log(responseData)
+      // cookies.set(
+      //   "session_token",
+      //   responseData.token,
+      //   {
+      //     path: "/",
+      //     httpOnly: true,
+      //     maxAge: 30 * 2 * 24 * 60 * 60,
+      //     secure: false,
+      //     sameSite: "strict",
+      //   }
+      // )
       throw redirect(302, "/");
     } else {
-      const response: Promise<any> = await resp.json();
-      const responseData = JSON.parse(await response);
+      const response = await resp.json();
+      const responseData = await response;
       return {
         error: responseData.error
       }
