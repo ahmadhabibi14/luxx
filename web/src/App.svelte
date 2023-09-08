@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { Route, Router, Link, navigate } from "svelte-routing";
+  import { Route, Router, navigate } from "svelte-routing";
   import "./app.css";
   import Base from "./routes/base/Base.svelte";
   import NotFound from "./routes/error/NotFound.svelte";
@@ -10,17 +10,12 @@
   let url = "";
 
   function getCookie(name) {
-    const cookies = document.cookie.split(";");
-    for (const cookie of cookies) {
-      const [cookieName, cookieVal] = cookie.split("=");
-      if (cookieName.trim() === name) {
-        return decodeURIComponent(cookieVal);
-      }
-    }
+    var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    if (match) return match[2];
   }
   onMount(() => {
-    const cookie_value = getCookie("token");
-    if (cookie_value) {
+    const auth = getCookie("auth");
+    if (auth) {
       navigate("/register");
     }
   });
