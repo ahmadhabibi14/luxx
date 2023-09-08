@@ -85,6 +85,5 @@ func Register(c *fiber.Ctx) error {
 	successResp, _ := json.Marshal(out)
 
 	defer db.Close()
-	c.Append("Access-Control-Allow-Origin", "http://localhost:5173")
 	return c.Status(fiber.StatusOK).JSON(string(successResp))
 }
