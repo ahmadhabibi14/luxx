@@ -1,11 +1,27 @@
 <script>
+	// import { goto } from "$app/navigation";
+	import { API_PATH } from "$lib/utils/constant";
+	import axios from "axios";
 	import Head from "$lib/partials/head.svelte";
-	import Footer from "../../../lib/partials/footer.svelte";
+	import Footer from "$lib/partials/footer.svelte";
 
-	export let form;
-	let isError = false;
-	if (form?.error) {
-		isError = true;
+	let errorMessage = "";
+	let email, password, username, fullname;
+
+	async function handleRegister() {
+		return await axios
+			.post(`${API_PATH}/api/auth/register`, {
+				email: email,
+				password: password,
+				username: username,
+				fullname: fullname
+			})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 </script>
 
@@ -24,7 +40,7 @@
 			<h1 class="font-bold text-center text-4xl">Create Your Account</h1>
 			<p class="text-center text-sm text-slate-700 mt-1.5">Welcome! Please enter your details</p>
 		</header>
-		{#if isError === true}
+		{#if errorMessage}
 			<div
 				class="w-full h-fit p-2 rounded-md flex flex-row justify-center gap-2 items-center bg-red-500 text-white"
 			>
@@ -36,12 +52,13 @@
 						d="M4.89984 19.7499C4.70984 19.7499 4.51984 19.6799 4.36984 19.5299C4.07984 19.2399 4.07984 18.7599 4.36984 18.4699L18.3698 4.46994C18.6598 4.17994 19.1398 4.17994 19.4298 4.46994C19.7198 4.75994 19.7198 5.23994 19.4298 5.52994L5.42984 19.5299C5.27984 19.6799 5.08984 19.7499 4.89984 19.7499Z"
 					/>
 				</svg>
-				<span>{form?.error}</span>
+				<span>{errorMessage}</span>
 			</div>
 		{/if}
-		<form method="POST" class="flex flex-col gap-4">
+		<div class="flex flex-col gap-4">
 			<label for="fullname">
 				<input
+					bind:value={fullname}
 					class="w-full border-slate-400/80 border rounded-md bg-transparent focus:border-slate-950 caret-slate-950 py-2 px-4 outline-1 focus:outline-slate-950"
 					type="text"
 					id="fullname"
@@ -50,6 +67,7 @@
 			</label>
 			<label for="username">
 				<input
+					bind:value={username}
 					class="w-full border-slate-400/80 border rounded-md bg-transparent focus:border-slate-950 caret-slate-950 py-2 px-4 outline-1 focus:outline-slate-950"
 					type="text"
 					id="username"
@@ -58,6 +76,7 @@
 			</label>
 			<label for="email">
 				<input
+					bind:value={email}
 					class="w-full border-slate-400/80 border rounded-md bg-transparent focus:border-slate-950 caret-slate-950 py-2 px-4 outline-1 focus:outline-slate-950"
 					type="email"
 					id="email"
@@ -66,6 +85,7 @@
 			</label>
 			<label for="password">
 				<input
+					bind:value={password}
 					class="w-full border-slate-400/80 border rounded-md bg-transparent focus:border-slate-950 caret-slate-950 py-2 px-4 outline-1 focus:outline-slate-950"
 					type="password"
 					id="password"
@@ -73,11 +93,12 @@
 				/>
 			</label>
 			<button
-				type="submit"
+				on:click={handleRegister}
 				class="cursor-pointer py-2.5 bg-slate-950 hover:bg-slate-900 hover:shadow-md text-slate-100 rounded-md"
-				>Create Account</button
 			>
-		</form>
+				Create Account
+			</button>
+		</div>
 	</div>
 </div>
 <Footer />
