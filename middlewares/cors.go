@@ -9,7 +9,7 @@ import (
 
 var CORSConfig = cors.Config{
 	AllowHeaders:     "Origin, Content-Type, Accept, Content-Length, Accept-Language, Accept-Encoding, Connection, Access-Control-Allow-Origin",
-	AllowOrigins:     "http://localhost:3000, https://localhost:5173, http://203.194.113.211",
+	AllowOrigins:     "*",
 	AllowCredentials: true,
 	AllowMethods: strings.Join([]string{
 		fiber.MethodGet,
