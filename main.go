@@ -7,6 +7,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 
 	"luxx/middlewares"
@@ -27,7 +28,14 @@ func init() {
 
 func main() {
 	webdomain := fmt.Sprintf("localhost:%s", os.Getenv("WEB_PORT"))
+	file, err := os.OpenFile("./tmp/web-server.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer file.Close()
+	// Define file to logs
 	app := fiber.New()
+	app.Use(logger.New(middlewares.LoggerConfig(file)))
 	app.Use(cors.New(middlewares.CORSConfig))
 
 	// All Backend services in /api endpoints

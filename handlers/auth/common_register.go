@@ -16,9 +16,9 @@ import (
 
 type (
 	registerInput struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-		Username string `json:"username"`
+		Email    string `json:"email" validate:"required,email"`
+		Password string `json:"password" validate:"required,min=8,containsany=!@#?*"`
+		Username string `json:"username" validate:"omitempty,min=4"`
 		Fullname string `json:"fullname"`
 	}
 	registerOut struct {
@@ -41,6 +41,13 @@ func Register(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(&in); err != nil {
 		errmsg.ErrorMsg = "invalid input"
+		errorResp, _ := json.Marshal(errmsg)
+		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
+	}
+
+	isValid := utils.ValidateStruct(in)
+	if isValid != nil {
+		errmsg.ErrorMsg = isValid.Error()
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}
