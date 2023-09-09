@@ -11,5 +11,5 @@ import (
 func Users(api fiber.Router) {
 	user := api.Group("/user")
 
-	user.Get("/user-data", middlewares.AuthJWT, users.UserData)
+	user.Post("/user-data", middlewares.AuthJWT, users.UserData)
 }

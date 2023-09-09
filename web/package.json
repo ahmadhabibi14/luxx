@@ -6,11 +6,13 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "pnpm exec prettier --write --plugin prettier-plugin-svelte . && vite build",
+		"watch": "node build.js",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^2.4.2",
 		"autoprefixer": "^10.4.15",
+		"chokidar": "^3.5.3",
 		"postcss": "^8.4.29",
 		"prettier": "^3.0.3",
 		"prettier-plugin-svelte": "^3.0.3",

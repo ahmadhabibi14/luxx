@@ -11,6 +11,9 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.15
     version: 10.4.15(postcss@8.4.29)
+  chokidar:
+    specifier: ^3.5.3
+    version: 3.5.3
   postcss:
     specifier: ^8.4.29
     version: 8.4.29
