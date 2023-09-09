@@ -15,7 +15,7 @@
 	let email, password, username, fullname;
 
 	async function handleRegister() {
-		const resp = await fetch("/api/auth/register", {
+		const resp = await fetch("http://localhost:1414/api/auth/register", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -28,6 +28,7 @@
 			})
 		});
     if (resp) {
+			console.log(resp)
       const auth = getCookie("auth");
       if (auth) {
         navigate("/login");

@@ -1,10 +1,13 @@
 package auth
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
+	"time"
 
 	"luxx/config"
+	"luxx/database/sqlc"
 	"luxx/utils"
 
 	"github.com/gofiber/fiber/v2"
@@ -30,6 +33,8 @@ type (
 
 func Register(c *fiber.Ctx) error {
 	var db *sql.DB = config.ConnectDB()
+	queries := sqlc.New(db)
+	ctx := context.Background()
 	var in registerInput
 	var out registerOut
 	var errmsg registerError
@@ -40,9 +45,8 @@ func Register(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}
 
-	var checkUsername error
-	checkUsername = db.QueryRow("SELECT username FROM Users WHERE username = ?", in.Username).Scan(&in.Username)
-	if checkUsername == nil {
+	_, err := queries.GetUserByUsername(ctx, in.Username)
+	if err == nil {
 		errmsg.ErrorMsg = "Username already exists"
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
@@ -70,7 +74,7 @@ func Register(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(string(errorResp))
 	}
 
-	token, err := config.GenerateJWT(user_id)
+	token, err := config.GenerateJWT(user_id, time.Now().AddDate(0, 2, 0))
 	if err != nil {
 		errmsg.ErrorMsg = "Unable to generate session token"
 		errorResp, _ := json.Marshal(errmsg)
@@ -83,6 +87,7 @@ func Register(c *fiber.Ctx) error {
 		Message:  "User created successfully!",
 	}
 	successResp, _ := json.Marshal(out)
+	config.SetJWTasCookie(c, token, time.Now().AddDate(0, 2, 0))
 
 	defer db.Close()
 	return c.Status(fiber.StatusOK).JSON(string(successResp))

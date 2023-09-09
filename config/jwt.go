@@ -11,8 +11,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func GenerateJWT(user_id string) (tokenString string, err error) {
-	expirationTime := time.Now().AddDate(0, 2, 0)
+func GenerateJWT(user_id string, expirationTime time.Time) (tokenString string, err error) {
 	claims := jwt.MapClaims{
 		"authorized": true,
 		"user_id":    user_id,
