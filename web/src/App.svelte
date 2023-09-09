@@ -6,7 +6,7 @@
 	import NotFound from "./routes/error/NotFound.svelte";
 	import Register from "./routes/auth/Register.svelte";
 	import Login from "./routes/auth/Login.svelte";
-  import {getCookie} from "./lib/utils/helper";
+	import { getCookie } from "./lib/utils/helper";
 
 	let url = "";
 	onMount(() => {

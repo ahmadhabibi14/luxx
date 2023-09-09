@@ -35,6 +35,10 @@ func main() {
 	defer file.Close()
 	// Define file to logs
 	app := fiber.New()
+	app.Static("/", "web/dist/")
+	app.Get("*", func(c *fiber.Ctx) error {
+		return c.SendFile("./web/dist/index.html")
+	})
 	app.Use(logger.New(middlewares.LoggerConfig(file)))
 	app.Use(cors.New(middlewares.CORSConfig))
 

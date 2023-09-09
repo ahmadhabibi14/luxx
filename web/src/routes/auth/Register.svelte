@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import { navigate } from "svelte-routing";
 	import Head from "../../lib/partials/head.svelte";
-  import { getCookie } from "../../lib/utils/helper";
+	import { getCookie } from "../../lib/utils/helper";
 
 	onMount(() => {
 		const auth = getCookie("auth");
@@ -15,27 +15,36 @@
 	let email, password, username, fullname;
 
 	async function handleRegister() {
-		const resp = await fetch("http://localhost:1414/api/auth/register", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				email: email,
-				password: password,
-				username: username,
-				fullname: fullname
-			})
-		});
-    if (resp) {
-			console.log(resp)
-      const auth = getCookie("auth");
-      if (auth) {
-        navigate("/login");
-        return;
-      }
-    }
-		return;
+		try {
+			const resp = await fetch("/api/auth/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					email: email,
+					password: password,
+					username: username,
+					fullname: fullname
+				})
+			});
+
+			if (resp.ok) {
+				const creds = await resp.json();
+				console.log(creds);
+				const auth = getCookie("auth");
+				if (auth) {
+					navigate("/login");
+					return;
+				}
+			} else {
+				const errorData = await resp.json();
+				console.log(errorData);
+			}
+		} catch (error) {
+			console.error(error);
+			alert("Unexpected error occurred during register");
+		}
 	}
 </script>
 
