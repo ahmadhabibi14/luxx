@@ -32,14 +32,11 @@
 			if (resp.ok) {
 				const creds = await resp.json();
 				console.log(creds);
-				const auth = getCookie("auth");
-				if (auth) {
-					navigate("/login");
-					return;
-				}
+				navigate("/login");
 			} else {
 				const errorData = await resp.json();
-				console.log(errorData);
+				const errorMsg = await JSON.parse(errorData);
+				alert(errorMsg["error"]);
 			}
 		} catch (error) {
 			console.error(error);
