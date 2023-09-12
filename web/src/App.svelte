@@ -11,7 +11,9 @@
 	let url = "";
 	onMount(() => {
 		const auth = getCookie("auth");
-		if (!auth) {
+		if (auth) {
+			console.log(auth);
+		} else {
 			navigate("/register");
 		}
 	});
