@@ -1,14 +1,17 @@
 <script>
 	import { onMount } from "svelte";
 	import { navigate } from "svelte-routing";
-	import Head from "../../lib/partials/head.svelte";
 	import { getCookie } from "../../lib/utils/helper";
+	import Head from "../../lib/partials/head.svelte";
+	import Growl from "../../lib/components/growl.svelte";
 
+	let growlComponent;
 	onMount(() => {
 		const auth = getCookie("auth");
 		if (auth) {
 			navigate("/");
 		}
+		growlComponent.showGrowl();
 	});
 
 	let errorMessage = "";
@@ -46,6 +49,7 @@
 </script>
 
 <Head title="Register" description="LuXX - Register" />
+<Growl bind:this={growlComponent} />
 
 <main class="bg-slate-100 h-screen w-full">
 	<div
