@@ -17,9 +17,9 @@ import (
 type (
 	registerInput struct {
 		Email    string `json:"email" validate:"required,email"`
-		Password string `json:"password" validate:"required,min=8,containsany=!@#?*"`
-		Username string `json:"username" validate:"omitempty,min=4"`
-		Fullname string `json:"fullname"`
+		Password string `json:"password" validate:"required,min=8,containsany=!@#?*%&>_<}-{+"`
+		Username string `json:"username" validate:"required,omitempty,min=4"`
+		Fullname string `json:"fullname" validate:"required"`
 	}
 	registerOut struct {
 		Token    string `json:"token"`
