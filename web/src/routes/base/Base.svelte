@@ -8,7 +8,9 @@
 
 <Router {url}>
 	<Navbar />
-	<div>
-		<Route path="/"><Home /></Route>
+	<div class="bg-slate-950">
+		<Route path="/">
+			<Home />
+		</Route>
 	</div>
 </Router>

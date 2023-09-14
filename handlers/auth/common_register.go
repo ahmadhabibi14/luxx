@@ -35,9 +35,11 @@ func Register(c *fiber.Ctx) error {
 	var db *sql.DB = config.ConnectDB()
 	queries := sqlc.New(db)
 	ctx := context.Background()
-	var in registerInput
-	var out registerOut
-	var errmsg registerError
+	var (
+		in     registerInput
+		out    registerOut
+		errmsg registerError
+	)
 
 	if err := c.BodyParser(&in); err != nil {
 		errmsg.ErrorMsg = "invalid input"
@@ -52,8 +54,15 @@ func Register(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}
 
-	_, err := queries.GetUserByUsername(ctx, in.Username)
-	if err == nil {
+	_, isUsernameExist := queries.GetUserByUsername(ctx, in.Username)
+	if isUsernameExist == nil {
+		errmsg.ErrorMsg = "Username already exists"
+		errorResp, _ := json.Marshal(errmsg)
+		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
+	}
+
+	_, isEmailExist := queries.GetUserByEmail(ctx, in.Email)
+	if isEmailExist == nil {
 		errmsg.ErrorMsg = "Username already exists"
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))

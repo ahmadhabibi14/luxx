@@ -9,6 +9,10 @@ INSERT INTO Users (
 SELECT username FROM Users
 WHERE username = ?;
 
+-- name: GetUserByEmail :one
+SELECT email FROM Users
+WHERE email = ?;
+
 -- name: ListUsers :many
 SELECT username, full_name, email, avatar, join_at FROM Users
 ORDER BY join_at DESC;

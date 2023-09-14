@@ -38,6 +38,17 @@ func (q *Queries) CreateNewUser(ctx context.Context, arg CreateNewUserParams) er
 	return err
 }
 
+const getUserByEmail = `-- name: GetUserByEmail :one
+SELECT email FROM Users
+WHERE email = ?
+`
+
+func (q *Queries) GetUserByEmail(ctx context.Context, email string) (string, error) {
+	row := q.db.QueryRowContext(ctx, getUserByEmail, email)
+	err := row.Scan(&email)
+	return email, err
+}
+
 const getUserByUsername = `-- name: GetUserByUsername :one
 SELECT username FROM Users
 WHERE username = ?
