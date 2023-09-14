@@ -10,5 +10,6 @@ import (
 func Auth(api fiber.Router) {
 	cAuth := api.Group("/auth")
 
+	cAuth.Post("/login", auth.Login)
 	cAuth.Post("/register", auth.Register)
 }

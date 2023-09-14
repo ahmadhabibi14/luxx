@@ -42,7 +42,7 @@ func Register(c *fiber.Ctx) error {
 	)
 
 	if err := c.BodyParser(&in); err != nil {
-		errmsg.ErrorMsg = "invalid input"
+		errmsg.ErrorMsg = invalid_input
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}
@@ -56,21 +56,21 @@ func Register(c *fiber.Ctx) error {
 
 	_, isUsernameExist := queries.GetUserByUsername(ctx, in.Username)
 	if isUsernameExist == nil {
-		errmsg.ErrorMsg = "Username already exists"
+		errmsg.ErrorMsg = username_exist
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}
 
 	_, isEmailExist := queries.GetUserByEmail(ctx, in.Email)
 	if isEmailExist == nil {
-		errmsg.ErrorMsg = "Username already exists"
+		errmsg.ErrorMsg = email_exist
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(in.Password), bcrypt.DefaultCost)
 	if err != nil {
-		errmsg.ErrorMsg = "Unable to register user"
+		errmsg.ErrorMsg = error_generate_token
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusBadRequest).JSON(string(errorResp))
 	}
@@ -85,14 +85,14 @@ func Register(c *fiber.Ctx) error {
 		in.Password,
 	)
 	if err != nil {
-		errmsg.ErrorMsg = "Unable to register user"
+		errmsg.ErrorMsg = uncaught_error
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusInternalServerError).JSON(string(errorResp))
 	}
 
 	token, err := config.GenerateJWT(user_id, time.Now().AddDate(0, 2, 0))
 	if err != nil {
-		errmsg.ErrorMsg = "Unable to generate session token"
+		errmsg.ErrorMsg = error_generate_token
 		errorResp, _ := json.Marshal(errmsg)
 		return c.Status(fiber.StatusInternalServerError).JSON(string(errorResp))
 	}
@@ -100,7 +100,7 @@ func Register(c *fiber.Ctx) error {
 	out = registerOut{
 		Token:    token,
 		Username: in.Username,
-		Message:  "User created successfully!",
+		Message:  register_success,
 	}
 	successResp, _ := json.Marshal(out)
 	config.SetJWTasCookie(c, token, time.Now().AddDate(0, 2, 0))

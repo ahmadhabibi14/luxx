@@ -127,3 +127,21 @@ func (q *Queries) ListUsers(ctx context.Context) ([]ListUsersRow, error) {
 	}
 	return items, nil
 }
+
+const userLogin = `-- name: UserLogin :one
+SELECT user_id, email, password FROM Users
+WHERE email = ?
+`
+
+type UserLoginRow struct {
+	UserID   string `db:"user_id" json:"user_id"`
+	Email    string `db:"email" json:"email"`
+	Password string `db:"password" json:"password"`
+}
+
+func (q *Queries) UserLogin(ctx context.Context, email string) (UserLoginRow, error) {
+	row := q.db.QueryRowContext(ctx, userLogin, email)
+	var i UserLoginRow
+	err := row.Scan(&i.UserID, &i.Email, &i.Password)
+	return i, err
+}
