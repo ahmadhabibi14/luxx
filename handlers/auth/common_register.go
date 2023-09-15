@@ -3,8 +3,9 @@ package auth
 import (
 	"context"
 	"database/sql"
-	"encoding/json"
 	"time"
+
+	json "github.com/goccy/go-json"
 
 	"luxx/config"
 	"luxx/database/sqlc"

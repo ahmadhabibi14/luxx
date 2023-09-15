@@ -3,10 +3,11 @@ package auth
 import (
 	"context"
 	"database/sql"
-	"encoding/json"
 	"luxx/config"
 	"luxx/database/sqlc"
 	"time"
+
+	json "github.com/goccy/go-json"
 
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"

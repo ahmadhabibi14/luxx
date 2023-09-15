@@ -14,7 +14,7 @@
 		if (auth) {
 			console.log(auth);
 		} else {
-			navigate("/register");
+			navigate("/login");
 		}
 	});
 </script>
