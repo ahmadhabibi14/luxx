@@ -56,7 +56,7 @@
 		class="px-5 md:px-10 flex flex-row justify-center items-center h-full w-full gap-28 text-slate-950"
 	>
 		<div class="md:block hidden">
-			<img src="/icons/main/laptop.svg" alt="" class="w-[420px] h-auto" />
+			<img src="/icons/master/laptop.svg" alt="" class="w-[420px] h-auto" />
 		</div>
 		<div class="w-[450px] bg-white p-6 rounded-xl drop-shadow-lg flex flex-col gap-3">
 			<header>

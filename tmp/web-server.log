@@ -140,3 +140,5 @@
 2023-09-16 02:20:27 AM >> 2.294282ms | HTPP Status: 400 - POST /api/auth/register
 2023-09-16 02:20:28 AM >> 2.178415ms | HTPP Status: 400 - POST /api/auth/register
 2023-09-16 02:20:29 AM >> 2.522941ms | HTPP Status: 400 - POST /api/auth/register
+2023-09-16 06:11:20 PM >> 1.457306ms | HTPP Status: 400 - POST /api/auth/login
+2023-09-16 06:11:28 PM >> 1.347639ms | HTPP Status: 400 - POST /api/auth/login
