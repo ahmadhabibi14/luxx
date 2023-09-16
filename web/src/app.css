@@ -2,11 +2,167 @@
 @tailwind components;
 @tailwind utilities;
 
-.navbar {
-	@apply text-white fixed inset-0 z-40 w-screen h-16 bg-gray-900 border-b border-gray-700 dark:bg-opacity-75 dark:backdrop-blur;
+html {
+  font-family: "Inter", sans-serif;
 }
-.navbarDesktop {
-	@apply flex flex-row justify-between content-center items-center mx-auto space-x-4 w-11/12 h-full md:w-10/12;
+/* FONT FAMILY */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("/webfonts/Inter-Thin0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-Thin0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url("/webfonts/Inter-ThinItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-ThinItalic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("/webfonts/Inter-ExtraLight0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-ExtraLight0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url("/webfonts/Inter-ExtraLightItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-ExtraLightItalic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/webfonts/Inter-Light0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-Light0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/webfonts/Inter-LightItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-LightItalic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/webfonts/Inter-Regular0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-Regular0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/webfonts/Inter-Italic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-Italic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/webfonts/Inter-Medium0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-Medium0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/webfonts/Inter-MediumItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-MediumItalic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/webfonts/Inter-SemiBold0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-SemiBold0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/webfonts/Inter-SemiBoldItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-SemiBoldItalic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/webfonts/Inter-Bold0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-Bold0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/webfonts/Inter-BoldItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-BoldItalic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/webfonts/Inter-ExtraBold0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-ExtraBold0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/webfonts/Inter-ExtraBoldItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-ExtraBoldItalic0fe5.woff?v=3.12") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/webfonts/Inter-Black0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-Black0fe5.woff?v=3.12") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/webfonts/Inter-BlackItalic0fe5.woff2?v=3.12") format("woff2"),
+    url("/webfonts/Inter-BlackItalic0fe5.woff?v=3.12") format("woff");
+}
+
+
+.navbar {
+	@apply bg-slate-50 border border-slate-300 h-full w-72 flex flex-col justify-between
+		rounded-2xl py-5 px-2 shadow-sm text-slate-800;
 }
 
 .growl {

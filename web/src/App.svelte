@@ -8,19 +8,19 @@
 	import Login from "./routes/auth/Login.svelte";
 	import { getCookie } from "./lib/utils/helper";
 
-	let url = "";
 	onMount(() => {
 		const auth = getCookie("auth");
 		if (auth) {
 			console.log(auth);
+			navigate("/");
 		} else {
 			navigate("/login");
 		}
 	});
 </script>
 
-<Router {url}>
-	<Route path="/" component={Base} />
+<Router>
+	<Route path="/*" component={Base} />
 	<Route path="/register" component={Register} />
 	<Route path="/login" component={Login} />
 	<Route component={NotFound} />
