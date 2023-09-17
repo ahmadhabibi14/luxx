@@ -182,6 +182,9 @@ html {
 		rounded-2xl py-5 px-2 shadow-sm text-slate-800;
 }
 
+.navItem {
+	@apply flex flex-row items-center gap-3 px-4 py-2 rounded-lg hover:bg-sky-900/5;
+}
 .growl {
 	@apply min-w-[120px] max-w-[350px] py-2 px-6 rounded-md text-white drop-shadow-lg flex flex-row items-center gap-2;
 }

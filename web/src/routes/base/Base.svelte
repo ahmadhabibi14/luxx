@@ -65,7 +65,9 @@
 						<Route path="/">
 							<Home {user_data} />
 						</Route>
-						<Route path="/profile" component={Profile} />
+						<Route path="/profile">
+							<Profile />
+						</Route>
 					{/if}
 				</div>
 			</section>
