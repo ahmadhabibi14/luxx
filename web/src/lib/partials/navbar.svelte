@@ -1,10 +1,5 @@
 <script>
-	import { onMount } from "svelte";
 	import { Link } from "svelte-routing";
-
-	onMount(() => {
-		console.log(window.location.pathname);
-	});
 
 	let pathName;
 	$: if (window && window.location.pathname) {
