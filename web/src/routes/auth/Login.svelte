@@ -14,7 +14,6 @@
 		}
 	});
 
-	let errorMessage = "";
 	let email, password;
 
 	async function handleLogin() {
@@ -63,21 +62,6 @@
 				<h1 class="font-bold text-center text-4xl">Login 🫰</h1>
 				<p class="text-center text-sm text-slate-700 mt-1.5">Please enter your details</p>
 			</header>
-			{#if errorMessage}
-				<div
-					class="w-full h-fit p-2 rounded-md flex flex-row justify-center gap-2 items-center bg-red-500 text-white"
-				>
-					<svg viewBox="0 0 24 24" class="w-[18px] h-auto fill-current">
-						<path
-							d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12C1.25 6.07 6.07 1.25 12 1.25C17.93 1.25 22.75 6.07 22.75 12C22.75 17.93 17.93 22.75 12 22.75ZM12 2.75C6.9 2.75 2.75 6.9 2.75 12C2.75 17.1 6.9 21.25 12 21.25C17.1 21.25 21.25 17.1 21.25 12C21.25 6.9 17.1 2.75 12 2.75Z"
-						/>
-						<path
-							d="M4.89984 19.7499C4.70984 19.7499 4.51984 19.6799 4.36984 19.5299C4.07984 19.2399 4.07984 18.7599 4.36984 18.4699L18.3698 4.46994C18.6598 4.17994 19.1398 4.17994 19.4298 4.46994C19.7198 4.75994 19.7198 5.23994 19.4298 5.52994L5.42984 19.5299C5.27984 19.6799 5.08984 19.7499 4.89984 19.7499Z"
-						/>
-					</svg>
-					<span>{errorMessage}</span>
-				</div>
-			{/if}
 			<div class="flex flex-col gap-4">
 				<label for="email">
 					<input
