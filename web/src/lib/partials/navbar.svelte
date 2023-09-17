@@ -7,11 +7,8 @@
 	});
 
 	let pathName;
-	$: {
-		if (window && window.location.pathname) {
-			console.log(window.location.pathname);
-			pathName = window.location.pathname;
-		}
+	$: if (window && window.location.pathname) {
+		pathName = window.location.pathname;
 	}
 	function pathChanged() {
 		pathName = window.location.pathname;
