@@ -12,7 +12,6 @@
 		const auth = getCookie("auth");
 		if (auth) {
 			console.log(auth);
-			navigate("/");
 		} else {
 			navigate("/login");
 		}

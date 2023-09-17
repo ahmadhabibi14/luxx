@@ -13,12 +13,12 @@
 
 <Router {url}>
 	<div class="w-full bg-slate-200 h-screen">
-		<div class="md:w-8/12 h-full mx-auto flex flex-row gap-6 py-6">
+		<div class="lg:w-8/12 md:w-10/12 h-full mx-auto flex flex-row gap-3 py-3">
 			<Navbar />
-			<section class="h-full w-full flex flex-col gap-6">
+			<section class="h-full w-full flex flex-col gap-3">
 				<Header />
 				<div
-					class="bg-slate-50 border border-slate-300 rounded-2xl shadow-sm text-slate-800 w-full h-full py-6 px-4"
+					class="bg-slate-50 border border-slate-300 rounded-2xl shadow-sm text-slate-800 w-full h-full p-4"
 				>
 					<Route path="/" component={Home} />
 					<Route path="/profile" component={Profile} />
