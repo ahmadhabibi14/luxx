@@ -32,8 +32,10 @@
 				const errorData = await resp.json();
 				const errorMsg = await JSON.parse(errorData);
 				growlComponent.showGrowl("error", errorMsg["error"]);
+				setTimeout(() => {
+					navigate("/login");
+				}, 2000);
 			}
-			console.log(auth);
 		} else {
 			navigate("/login");
 		}
@@ -49,9 +51,7 @@
 			<Navbar />
 			<section class="h-full w-full flex flex-col gap-3">
 				<Header {user_data} />
-				<div
-					class="bg-slate-50 border border-slate-300 rounded-2xl shadow-sm text-slate-800 w-full h-full p-4"
-				>
+				<div class="route_container">
 					{#if onLoading}
 						<div class="flex flex-col justify-center items-center gap-3 h-full w-full">
 							<svg viewBox="0 0 24 24" class="fill-current animate-spin w-8 h-auto">
@@ -74,3 +74,18 @@
 		</div>
 	</div>
 </Router>
+
+<style lang="postcss">
+	.route_container {
+		@apply bg-slate-50 border border-slate-300 rounded-2xl shadow-sm text-slate-800 w-full h-full p-4 overflow-y-scroll;
+	}
+	.route_container::-webkit-scrollbar {
+		@apply w-2;
+	}
+	.route_container::-webkit-scrollbar-thumb {
+		@apply rounded-xl bg-slate-300;
+	}
+	.route_container::-webkit-scrollbar-track {
+		@apply bg-slate-50 my-3 border-4 border-transparent rounded-full w-2;
+	}
+</style>
