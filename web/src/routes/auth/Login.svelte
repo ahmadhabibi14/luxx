@@ -16,6 +16,9 @@
 
 	let email, password;
 
+	/**
+	 * @returns {Promise<void>}
+	 */
 	async function handleLogin() {
 		onUploading = true;
 		try {

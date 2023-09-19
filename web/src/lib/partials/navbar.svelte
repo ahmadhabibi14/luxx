@@ -5,6 +5,9 @@
 	$: if (window && window.location.pathname) {
 		pathName = window.location.pathname;
 	}
+	/**
+	 * @returns {void}
+	 */
 	function pathChanged() {
 		pathName = window.location.pathname;
 	}

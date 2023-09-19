@@ -17,6 +17,9 @@
 	let errorMessage = "";
 	let email, password, username, fullname;
 
+	/**
+	 * @returns {Promise<void>}
+	 */
 	async function handleRegister() {
 		onUploading = true;
 		try {
