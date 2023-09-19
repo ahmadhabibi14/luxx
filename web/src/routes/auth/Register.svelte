@@ -39,7 +39,11 @@
 			if (resp.ok) {
 				onUploading = false;
 				const creds = await resp.json();
-				navigate("/login");
+				const successMdg = await JSON.parse(creds);
+				growlComponent.showGrowl("success", successMdg["message"]);
+				setTimeout(() => {
+					navigate("/");
+				}, 2000);
 			} else {
 				onUploading = false;
 				const errorData = await resp.json();

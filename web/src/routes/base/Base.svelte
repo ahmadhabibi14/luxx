@@ -27,10 +27,11 @@
 				onLoading = false;
 				const respData = await resp.json();
 				user_data = await JSON.parse(JSON.stringify(respData));
-			} else {
+			} else if (!resp.ok) {
 				onLoading = false;
 				const errorData = await resp.json();
-				const errorMsg = await JSON.parse(errorData);
+				const errorMsg = await JSON.parse(JSON.stringify(errorData));
+				document.cookie = "auth= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 				growlComponent.showGrowl("error", errorMsg["error"]);
 				setTimeout(() => {
 					navigate("/login");
