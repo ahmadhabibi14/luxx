@@ -5,6 +5,11 @@
 	let growlMessage = "";
 	let growlType = "default"; // default, info, warning, error, success
 
+	/**
+	 * @param {string} type
+	 * @param {string} message
+	 * @returns {void}
+	 */
 	export function showGrowl(type, message) {
 		growlType = type;
 		growlMessage = message;
@@ -34,7 +39,6 @@
 	.growl {
 		@apply min-w-[120px] max-w-[350px] py-2 px-6 rounded-md text-white drop-shadow-lg flex flex-row items-center gap-2;
 	}
-
 	.error {
 		@apply bg-red-500;
 	}
