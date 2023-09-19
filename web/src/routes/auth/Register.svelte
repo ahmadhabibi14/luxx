@@ -43,7 +43,7 @@
 				growlComponent.showGrowl("success", successMdg["message"]);
 				setTimeout(() => {
 					navigate("/");
-				}, 2000);
+				}, 1400);
 			} else {
 				onUploading = false;
 				const errorData = await resp.json();

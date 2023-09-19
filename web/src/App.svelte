@@ -11,5 +11,4 @@
 	<Route path="/*" component={Base} />
 	<Route path="/register" component={Register} />
 	<Route path="/login" component={Login} />
-	<Route component={NotFound} />
 </Router>

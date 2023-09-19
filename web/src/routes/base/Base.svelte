@@ -5,6 +5,7 @@
 	import Head from "../../lib/partials/head.svelte";
 	import Header from "../../lib/partials/header.svelte";
 	import Profile from "./Profile.svelte";
+	import NotFound from "../error/NotFound.svelte";
 	import Growl from "../../lib/components/growl.svelte";
 	import { getCookie } from "../../lib/utils/helper";
 	import { onMount } from "svelte";
@@ -69,6 +70,7 @@
 						<Route path="/profile">
 							<Profile />
 						</Route>
+						<Route component={NotFound} />
 					{/if}
 				</div>
 			</section>
