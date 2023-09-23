@@ -178,23 +178,23 @@ html {
 }
 
 .navbar {
-	@apply bg-slate-50 border border-slate-300 h-full w-72 flex flex-col justify-between
-	rounded-2xl py-5 px-2 shadow-sm text-slate-800;
+	@apply bg-zinc-900 border border-zinc-700 h-full w-72 flex flex-col justify-between
+	rounded-2xl py-5 px-2 shadow-sm text-zinc-100;
 }
 .navItem {
-	@apply flex flex-row items-center gap-3 px-4 py-2 rounded-lg hover:bg-sky-900/5;
+	@apply flex flex-row items-center gap-3 px-4 py-2 rounded-lg hover:bg-zinc-800;
 }
 
 .post_input {
-	@apply p-3 bg-slate-100 rounded-lg focus:outline-0 text-clip whitespace-normal;
+	@apply p-3 bg-zinc-800 rounded-lg focus:outline-0 text-clip whitespace-normal;
 	resize: none;
 }
 .post_input::-webkit-scrollbar {
 	@apply w-2;
 }
 .post_input::-webkit-scrollbar-thumb {
-	@apply rounded-xl bg-slate-300;
+	@apply rounded-xl bg-zinc-700;
 }
 .post_input::-webkit-scrollbar-track {
-	@apply bg-slate-100;
+	@apply bg-zinc-800;
 }

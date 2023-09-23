@@ -6,6 +6,7 @@
 	import Header from "../../lib/partials/header.svelte";
 	import Profile from "./Profile.svelte";
 	import NotFound from "../error/NotFound.svelte";
+	import Unavailable from "../error/Unavailable.svelte";
 	import Growl from "../../lib/components/growl.svelte";
 	import { getCookie } from "../../lib/utils/helper";
 	import { onMount } from "svelte";
@@ -48,7 +49,7 @@
 <Growl bind:this={growlComponent} />
 
 <Router {url}>
-	<div class="w-full bg-slate-200 h-screen">
+	<div class="w-full bg-zinc-950 h-screen">
 		<div class="lg:w-8/12 md:w-10/12 h-full mx-auto flex flex-row gap-3 py-3">
 			<Navbar />
 			<section class="h-full w-full flex flex-col gap-3">
@@ -70,6 +71,18 @@
 						<Route path="/profile">
 							<Profile />
 						</Route>
+						<Route path="/chats">
+							<Unavailable />
+						</Route>
+						<Route path="/favorites">
+							<Unavailable />
+						</Route>
+						<Route path="/explore">
+							<Unavailable />
+						</Route>
+						<Route path="/settings">
+							<Unavailable />
+						</Route>
 						<Route component={NotFound} />
 					{/if}
 				</div>
@@ -80,15 +93,15 @@
 
 <style lang="postcss">
 	.route_container {
-		@apply bg-slate-50 border border-slate-300 rounded-2xl shadow-sm text-slate-800 w-full h-full p-4 overflow-y-scroll;
+		@apply bg-zinc-900 border border-zinc-700 rounded-2xl shadow-sm text-zinc-100 w-full h-full p-4 overflow-y-scroll;
 	}
 	.route_container::-webkit-scrollbar {
 		@apply w-2;
 	}
 	.route_container::-webkit-scrollbar-thumb {
-		@apply rounded-xl bg-slate-300;
+		@apply rounded-xl bg-zinc-700;
 	}
 	.route_container::-webkit-scrollbar-track {
-		@apply bg-slate-50 my-3 border-4 border-transparent rounded-full w-2;
+		@apply bg-zinc-900 my-3 border-4 border-transparent rounded-full w-2;
 	}
 </style>

@@ -3,7 +3,7 @@
 </script>
 
 <div class="font-medium flex flex-col gap-3 relative">
-	<div class="flex flex-col gap-3 p-2 bg-slate-100 shadow rounded-xl absolute w-full h-[130px]">
+	<div class="flex flex-col gap-3 p-2 bg-zinc-800 shadow rounded-xl absolute w-full h-[130px]">
 		<textarea name="post" id="post" placeholder="What's your feeling..." class="post_input"
 		></textarea>
 		<div class="flex flex-row justify-end">

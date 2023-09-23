@@ -3,7 +3,7 @@
 </script>
 
 <header
-	class="flex flex-row justify-end items-center bg-slate-50 border border-slate-300 rounded-2xl shadow-sm text-slate-800 h-16 w-full py-6 px-4"
+	class="flex flex-row justify-end items-center bg-zinc-900 border border-zinc-700 rounded-2xl shadow-sm text-zinc-100 h-16 w-full py-6 px-4"
 >
 	<div class="flex flex-row items-center gap-4 font-medium text-base cursor-pointer group">
 		<span class="group-hover:text-sky-500">{user_data?.full_name}</span>
