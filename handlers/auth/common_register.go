@@ -107,5 +107,5 @@ func Register(c *fiber.Ctx) error {
 	config.SetJWTasCookie(c, token, time.Now().AddDate(0, 2, 0))
 
 	defer db.Close()
-	return c.Status(fiber.StatusOK).JSON(string(successResp))
+	return c.Status(fiber.StatusCreated).JSON(string(successResp))
 }
