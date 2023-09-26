@@ -11,6 +11,7 @@ func SetJWTasCookie(c *fiber.Ctx, tokenString string, expiration time.Time) {
 		Name:     "auth",
 		Value:    tokenString,
 		Expires:  expiration,
+		SameSite: "Lax",
 		HTTPOnly: false,
 	})
 	return

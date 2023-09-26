@@ -21,9 +21,7 @@
 			onLoading = true;
 			const resp = await fetch("/api/user/user-data", {
 				method: "POST",
-				headers: {
-					Authorization: `Bearer ${auth}`
-				}
+				credentials: "include"
 			});
 			if (resp.ok) {
 				onLoading = false;
@@ -33,7 +31,7 @@
 				onLoading = false;
 				const errorData = await resp.json();
 				const errorMsg = await JSON.parse(JSON.stringify(errorData));
-				document.cookie = "auth= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+				// document.cookie = "auth= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 				growlComponent.showGrowl("error", errorMsg["error"]);
 				setTimeout(() => {
 					navigate("/login");

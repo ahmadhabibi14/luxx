@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"fmt"
-	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
@@ -40,11 +39,11 @@ func TokenValid(c *fiber.Ctx) error {
 }
 
 func ExtractToken(c *fiber.Ctx) string {
-	bearerToken := c.Get("Authorization")
-	if len(strings.Split(bearerToken, " ")) == 2 {
-		return strings.Split(bearerToken, " ")[1]
+	bearerToken := c.Cookies("auth")
+	if bearerToken == "" {
+		return ""
 	}
-	return ""
+	return bearerToken
 }
 
 func ExtractTokenID(c *fiber.Ctx) (interface{}, error) {
