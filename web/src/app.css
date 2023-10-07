@@ -186,7 +186,7 @@ html {
 }
 
 .post_input {
-	@apply p-3 bg-zinc-800 rounded-lg focus:outline-0 text-clip whitespace-normal;
+	@apply p-3 bg-zinc-800 rounded-lg focus:outline-0 text-clip whitespace-normal overflow-y-hidden;
 	resize: none;
 }
 .post_input::-webkit-scrollbar {

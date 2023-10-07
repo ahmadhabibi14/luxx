@@ -21,7 +21,7 @@
 			onLoading = true;
 			const resp = await fetch("/api/user/user-data", {
 				method: "POST",
-				credentials: "include"
+				credentials: "same-origin"
 			});
 			if (resp.ok) {
 				onLoading = false;

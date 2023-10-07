@@ -513,3 +513,12 @@
 2023-09-26 10:43:42 PM >> 23.467µs | HTPP Status: 429 - POST /api/user/user-data
 2023-09-26 10:44:02 PM >> 2.683298ms | HTPP Status: 200 - POST /api/user/user-data
 2023-09-26 10:44:03 PM >> 1.886061ms | HTPP Status: 200 - POST /api/user/user-data
+2023-10-07 09:52:26 PM >> 81.783µs | HTPP Status: 401 - POST /api/user/user-data
+2023-10-07 09:52:28 PM >> 59.482µs | HTPP Status: 401 - POST /api/user/user-data
+2023-10-07 09:52:31 PM >> 45.325µs | HTPP Status: 401 - POST /api/user/user-data
+2023-10-07 09:52:33 PM >> 37.17µs | HTPP Status: 401 - POST /api/user/user-data
+2023-10-07 09:52:35 PM >> 39.984µs | HTPP Status: 401 - POST /api/user/user-data
+2023-10-07 09:52:37 PM >> 83.216µs | HTPP Status: 401 - POST /api/user/user-data
+2023-10-07 09:52:39 PM >> 94.808µs | HTPP Status: 401 - POST /api/user/user-data
+2023-10-07 09:52:52 PM >> 80.862263ms | HTPP Status: 200 - POST /api/auth/login
+2023-10-07 09:52:53 PM >> 2.03919ms | HTPP Status: 200 - POST /api/user/user-data
